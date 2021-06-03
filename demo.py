@@ -1,6 +1,7 @@
 
 
 f = open('test.txt', 'r')
+f2= open('outputfile.txt','a')
 lines=f.readlines()
 
 titles = []
@@ -17,10 +18,11 @@ for i in range(len(lines)):
               if lines[i+2].startswith("Owner: chdauto") | lines[i+2].startswith("Owner: syspdbuild") | lines[i+2].startswith("Owner: syspdbuild2"):
                continue
               else:
-               print(lines[i].replace("\n", ""))
-               print("@"+lines[i+2].replace("Owner: ", "").replace("\n", "")+",Please add git notes to this commit!\n")
+               f2.write(lines[i])
+               f2.write("@"+lines[i+2].replace("Owner: ", "").replace("\n", "")+",Please add git notes to this commit!\n")
 for index, title in enumerate(titles):
-    print('[' + issues[index].replace(' ', '').replace("\n", "") + ']' + title)
+    f2.write('[' + issues[index].replace(' ', '').replace("\n", "") + ']' + title)
 
 
 f.close()
+f2.close()
